@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:latest
+    networks:
+      - inception-network
+    volumes:
+      - db:/var/lib/mysql
+    restart: always
+    env_file:
+      - .env
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    networks:
+      - inception-network
+    volumes:
+      - wordpress:/var/www/html
+    restart: always
+    env_file:
+      - .env
+
+  nginx:
+    depends_on:
+      - wordpress
+    image: nginx:latest
+    networks:
+      - inception-network
+    ports:
+      - 443:443
+    volumes:
+      - wordpress:/var/www/html
+    restart: always
+
+
+networks:
+  inception-network:
+
+volumes:
+  db:
+
+  wordpress:
