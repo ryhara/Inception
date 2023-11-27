@@ -11,7 +11,10 @@ down :
 
 re : down up
 
-# container stop -> container rm -> image rm -> volume rm -> network rm 
+# container stop -> container rm -> image rm -> volume rm -> network rm
 clean :
 
-.PHONY: all up down re clean
+env:
+	cp .env.example .env
+
+.PHONY: all up down re clean env
