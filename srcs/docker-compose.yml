@@ -5,8 +5,8 @@ services:
     build: ./requirements/mariadb
     container_name: mariadb
     image: mariadb:v42
-    networks:
-      - inception-network
+    # networks:
+    #   - inception-network
     # volumes:
     #   - mariadb:/var/lib/mysql
     restart: always
@@ -38,9 +38,9 @@ services:
   #   restart: always
 
 
-networks:
-  inception-network:
-    name: inception-network
+# networks:
+#   inception-network:
+#     name: inception-network
 
 # volumes:
 #   mariadb:

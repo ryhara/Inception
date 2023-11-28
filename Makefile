@@ -28,6 +28,15 @@ down :
 
 re : down up
 
+ps :
+	docker container ls -a
+	@echo "----------------------------------------"
+	docker image ls -a
+	@echo "----------------------------------------"
+	docker volume ls
+	@echo "----------------------------------------"
+	docker network ls
+
 # container stop -> container rm -> image rm -> volume rm -> network rm
 clean :
 	docker stop $(docker ps -qa);
@@ -48,7 +57,7 @@ env-clean:
 	rm -rf $(NGINX_PATH)/.env
 	rm -rf $(WORDPRESS_PATH)/.env
 
-.PHONY: all up down re clean env env-clean
+.PHONY: all build stop up down ps re clean env env-clean
 
 # docker image build -t mariadb:v42 .
 # docker container run -it --name mariadb42  mariadb:v42
