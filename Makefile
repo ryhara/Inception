@@ -17,7 +17,7 @@ all: up
 build :
 	docker-compose -f $(DOCKER_COMPOSE_YML) build --no-cache
 
-up :
+up : build
 	docker-compose -f $(DOCKER_COMPOSE_YML) up -d --build
 
 stop :
@@ -36,6 +36,9 @@ ps :
 	docker volume ls
 	@echo "----------------------------------------"
 	docker network ls
+
+mariadb :
+	docker exec -it mariadb /bin/bash
 
 # container stop -> container rm -> image rm -> volume rm -> network rm
 clean :
@@ -57,7 +60,7 @@ env-clean:
 	rm -rf $(NGINX_PATH)/.env
 	rm -rf $(WORDPRESS_PATH)/.env
 
-.PHONY: all build stop up down ps re clean env env-clean
+.PHONY: all build stop up down ps re clean env env-clean mariadb
 
 # docker image build -t mariadb:v42 .
 # docker container run -it --name mariadb42  mariadb:v42
