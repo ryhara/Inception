@@ -4,6 +4,6 @@ RUN apt update -y && \
 	apt upgrade -y && \
 	apt install nginx -y
 
-COPY source dest
+# COPY ./my-nginx.cnf /etc/nginx/sites-available/my-nginx.conf
 
-CMD [ "executable" ]
+CMD echo "nginx"

@@ -4,6 +4,6 @@ RUN apt update -y && \
 	apt upgrade -y && \
 	apt install
 
-COPY source dest
+# COPY ./my-wordpress.cnf /etc/mysql/my-wordpress.cnf
 
-CMD
+CMD echo "wordpress"

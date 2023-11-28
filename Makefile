@@ -17,6 +17,9 @@ all: up
 up :
 	docker-compose -f $(DOCKER_COMPOSE_YML) up -d
 
+stop :
+	docker-compose -f $(DOCKER_COMPOSE_YML) stop
+
 down :
 	docker-compose -f $(DOCKER_COMPOSE_YML) down
 
@@ -38,3 +41,6 @@ env-clean:
 	rm -rf $(WORDPRESS_PATH)/.env
 
 .PHONY: all up down re clean env env-clean
+
+# docker image build -t mariadb:v42 .
+# docker container run -it --name mariadb42  mariadb:v42
