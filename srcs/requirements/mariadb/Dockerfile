@@ -8,5 +8,8 @@ COPY ./tools/setup.sh /tmp/mariadb/setup.sh
 
 RUN chmod +x /tmp/mariadb/setup.sh
 
-# CMD 起動時に実行するコマンドを指定する
-CMD sh /tmp/mariadb/setup.sh
+
+EXPOSE 3306
+
+ENTRYPOINT ["/tmp/mariadb/setup.sh"]
+CMD ["mysqld_safe"]

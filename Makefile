@@ -14,8 +14,11 @@ WORDPRESS_PATH = ./srcs/requirements/wordpress
 
 all: up
 
+build :
+	docker-compose -f $(DOCKER_COMPOSE_YML) build --no-cache
+
 up :
-	docker-compose -f $(DOCKER_COMPOSE_YML) up -d
+	docker-compose -f $(DOCKER_COMPOSE_YML) up -d --build
 
 stop :
 	docker-compose -f $(DOCKER_COMPOSE_YML) stop
@@ -27,6 +30,11 @@ re : down up
 
 # container stop -> container rm -> image rm -> volume rm -> network rm
 clean :
+	docker stop $(docker ps -qa);
+	docker rm $(docker ps -qa);
+	docker rmi -f $(docker images -qa);
+	docker volume rm $(docker volume ls -q);
+	docker network rm $(docker network ls -q) 2>/dev/null
 
 env:
 	cp .env.example .env
@@ -44,3 +52,5 @@ env-clean:
 
 # docker image build -t mariadb:v42 .
 # docker container run -it --name mariadb42  mariadb:v42
+
+# docker logs mariadb

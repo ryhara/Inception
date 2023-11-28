@@ -94,7 +94,7 @@ expire_logs_days        = 10
 # utf8 4-byte character set. See also client.cnf
 # -- changed collation-server = _ci -> _bin　enable case sensitivity
 character-set-server  = utf8mb4
-collation-server      = utf8mb4_general_bin
+collation-server      = utf8mb4_general_ci
 
 #
 # * InnoDB
