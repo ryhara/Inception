@@ -5,30 +5,34 @@ services:
     build: ./requirements/mariadb
     container_name: mariadb
     image: mariadb:v42
-    # networks:
-    #   - inception-network
-    # volumes:
-    #   - mariadb:/var/lib/mysql
+    networks:
+      - inception-network
+    volumes:
+      - mariadb:/var/lib/mysql
     restart: always
     env_file:
       - ./requirements/mariadb/.env
 
-  # wordpress:
-  #   depends_on:
-  #     - db
-  #   image: wordpress:latest
-  #   networks:
-  #     - inception-network
-  #   volumes:
-  #     - wordpress:/var/www/html
-  #   restart: always
-  #   env_file:
-  #     - .env
+  wordpress:
+    build : ./requirements/wordpress
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    image: wordpress:v42
+    networks:
+      - inception-network
+    volumes:
+      - wordpress:/var/www/html
+    restart: always
+    env_file:
+      - ./requirements/wordpress/.env
 
   # nginx:
+  #   build : ./requirements/nginx
+  #   container_name: nginx
   #   depends_on:
   #     - wordpress
-  #   image: nginx:latest
+  #   image: nginx:v42
   #   networks:
   #     - inception-network
   #   ports:
@@ -36,25 +40,27 @@ services:
   #   volumes:
   #     - wordpress:/var/www/html
   #   restart: always
+  #   env_file:
+  #     - ./requirements/nginx/.env
 
 
-# networks:
-#   inception-network:
-#     name: inception-network
+networks:
+  inception-network:
+    name: inception-network
 
-# volumes:
-#   mariadb:
-#     name: mariadb
-#     driver: local
-#     driver_opts:
-#       type: bind
-#       device: /Users/ryhara/tmp/inception/mariadb
-#       o: bind
-# device VM用にあとで書き換える
-
-  # wordpress:
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     device: /home/ryhara/data/wordpress
-  #     o: bind
+# device VM用にあとで書き換える -> 現状はMac内のパスを指定している
+volumes:
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      type: bind
+      device: ${MARIADB_VOLUME_PATH}
+      o: bind
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      type: none
+      device: ${WORDPRESS_VOLUME_PATH}
+      o: bind

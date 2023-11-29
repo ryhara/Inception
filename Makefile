@@ -1,11 +1,11 @@
-ifeq ($(wildcard ./*/.env),)
+# ifeq ($(wildcard ./*/.env),)
 
-else
-	include ./.env
-	include ./srcs/requirements/mariadb/.env
-	include ./srcs/requirements/wordpress/.env
-	include ./srcs/requirements/nginx/.env
-endif
+# else
+# 	include ./srcs/.env
+# 	include ./srcs/requirements/mariadb/.env
+# 	include ./srcs/requirements/wordpress/.env
+# 	include ./srcs/requirements/nginx/.env
+# endif
 
 DOCKER_COMPOSE_YML = ./srcs/docker-compose.yml
 MARIADB_PATH = ./srcs/requirements/mariadb
@@ -40,6 +40,16 @@ ps :
 mariadb :
 	docker exec -it mariadb /bin/bash
 
+wordpress :
+	docker exec -it wordpress /bin/bash
+
+net-inspect :
+	docker network inspect inception-network
+
+image-rm :
+	docker image rm mariadb:v42 wordpress:v42
+volume-rm :
+	docker volume rm mariadb wordpress
 # container stop -> container rm -> image rm -> volume rm -> network rm
 clean :
 	docker stop $(docker ps -qa);
@@ -49,18 +59,18 @@ clean :
 	docker network rm $(docker network ls -q) 2>/dev/null
 
 env:
-	cp .env.example .env
+	cp ./srcs/.env.example ./srcs/.env
 	cp $(MARIADB_PATH)/.env.example $(MARIADB_PATH)/.env
 	cp $(NGINX_PATH)/.env.example $(NGINX_PATH)/.env
 	cp $(WORDPRESS_PATH)/.env.example $(WORDPRESS_PATH)/.env
 
 env-clean:
-	rm -rf .env
+	rm -rf ./srcs/.env
 	rm -rf $(MARIADB_PATH)/.env
 	rm -rf $(NGINX_PATH)/.env
 	rm -rf $(WORDPRESS_PATH)/.env
 
-.PHONY: all build stop up down ps re clean env env-clean mariadb
+.PHONY: all build stop up down ps re clean env env-clean mariadb net-inspect wordpress image-rm volume-rm
 
 # docker image build -t mariadb:v42 .
 # docker container run -it --name mariadb42  mariadb:v42
