@@ -27,10 +27,16 @@ RUN apt update -y && \
 	mariadb-client
 
 # COPY ./conf/.conf /etc/php/8.0/fpm/pool.d/www.conf
+# 残りはconf系と、実際に起動して確認
+
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+	chmod +x wp-cli.phar && \
+	mv wp-cli.phar /usr/local/bin/wp
 
 COPY ./tools/setup.sh /tmp/wordpress/setup.sh
 RUN chmod +x /tmp/wordpress/setup.sh
 
+COPY ./tools/wordpress-6.4.1.tar.gz /tmp/
 EXPOSE 9000
 
 ENTRYPOINT ["/tmp/wordpress/setup.sh"]
