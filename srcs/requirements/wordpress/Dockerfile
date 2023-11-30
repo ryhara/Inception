@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 RUN apt update -y && \
 	apt upgrade -y \
-	apt install php8 \
+	apt install -y php8 \
 	php8-fpm \
 	php8-mysql \
 	php8-mysqli \
@@ -23,12 +23,12 @@ RUN apt update -y && \
 	curl \
 	tar \
 	wget \
+	ca-certificates \
 	mariadb-client
 
-# COPY ./my-wordpress.cnf /etc/mysql/my-wordpress.cnf
+# COPY ./conf/.conf /etc/php/8.0/fpm/pool.d/www.conf
 
 COPY ./tools/setup.sh /tmp/wordpress/setup.sh
-
 RUN chmod +x /tmp/wordpress/setup.sh
 
 EXPOSE 9000
