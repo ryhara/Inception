@@ -1,13 +1,11 @@
-# ifeq ($(wildcard ./*/.env),)
+ifeq ($(wildcard ./*/.env),)
 
-# else
-# 	include ./srcs/.env
-# 	include ./srcs/requirements/mariadb/.env
-# 	include ./srcs/requirements/wordpress/.env
-# 	include ./srcs/requirements/nginx/.env
-# endif
+else
+	include ./srcs/.env
+endif
 
 DOCKER_COMPOSE_YML = ./srcs/docker-compose.yml
+SRCS_PATH = ./srcs
 MARIADB_PATH = ./srcs/requirements/mariadb
 NGINX_PATH = ./srcs/requirements/nginx
 WORDPRESS_PATH = ./srcs/requirements/wordpress
@@ -18,6 +16,8 @@ build :
 	docker-compose -f $(DOCKER_COMPOSE_YML) build --no-cache
 
 up : build
+	@mkdir -p $(MARIA_DB_VOLUME_PATH)
+	@mkdir -p $(WORDPRESS_VOLUME_PATH)
 	docker-compose -f $(DOCKER_COMPOSE_YML) up -d --build
 
 stop :
@@ -59,13 +59,13 @@ clean :
 	docker network rm $(docker network ls -q) 2>/dev/null
 
 env:
-	cp ./srcs/.env.example ./srcs/.env
+	cp $(SRCS_PATH)/.env.example $(SRCS_PATH)/.env
 	cp $(MARIADB_PATH)/.env.example $(MARIADB_PATH)/.env
 	cp $(NGINX_PATH)/.env.example $(NGINX_PATH)/.env
 	cp $(WORDPRESS_PATH)/.env.example $(WORDPRESS_PATH)/.env
 
 env-clean:
-	rm -rf ./srcs/.env
+	rm -rf $(SRCS_PATH)/.env
 	rm -rf $(MARIADB_PATH)/.env
 	rm -rf $(NGINX_PATH)/.env
 	rm -rf $(WORDPRESS_PATH)/.env

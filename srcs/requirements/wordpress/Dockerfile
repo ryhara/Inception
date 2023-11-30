@@ -1,8 +1,28 @@
 FROM debian:bullseye
 
 RUN apt update -y && \
-	apt upgrade -y
-	# apt install
+	apt upgrade -y \
+	apt install php8 \
+	php8-fpm \
+	php8-mysql \
+	php8-mysqli \
+	php8-json \
+	php8-curl \
+	php8-dom \
+	php8-exif \
+	php8-fileinfo \
+	phpb-hash \
+	php8-igbinary \
+	php-imagick \
+	php8-intl \
+	php8-mbstring \
+	php8-openssl \
+	php8-pcre \
+	php8-xml \
+	php8-zip \
+	curl \
+	tar \
+	wget
 
 # COPY ./my-wordpress.cnf /etc/mysql/my-wordpress.cnf
 
