@@ -22,7 +22,8 @@ RUN apt update -y && \
 	php8-zip \
 	curl \
 	tar \
-	wget
+	wget \
+	mariadb-client
 
 # COPY ./my-wordpress.cnf /etc/mysql/my-wordpress.cnf
 
