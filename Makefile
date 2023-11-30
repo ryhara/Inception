@@ -15,7 +15,7 @@ all: up
 build :
 	docker-compose -f $(DOCKER_COMPOSE_YML) build --no-cache
 
-up : build
+up :
 	@mkdir -p $(MARIADB_VOLUME_PATH)
 	@mkdir -p $(WORDPRESS_VOLUME_PATH)
 	docker-compose -f $(DOCKER_COMPOSE_YML) up -d --build
