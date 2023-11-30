@@ -35,6 +35,9 @@ RUN chmod +x /tmp/setup.sh
 
 COPY ./tools/wordpress-6.4.1.tar.gz /tmp/
 
+# 今回時間節約のためはローカルにwordpressのtar.gzを置いているので、wgetはコメントアウト
+# RUN wget -O /tmp/wordpress-6.4.1.tar.gz https://wordpress.org/wordpress-6.4.1.tar.gz
+
 RUN groupadd -r wordpress && useradd -r -g wordpress wordpress && \
 	groupadd -r nginx && useradd -r -g nginx nginx && \
 	mkdir -p /var/www/html && \
