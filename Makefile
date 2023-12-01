@@ -25,6 +25,7 @@ stop :
 
 down :
 	docker-compose -f $(DOCKER_COMPOSE_YML) down
+	make image-rm
 
 re : down up
 
@@ -43,14 +44,18 @@ mariadb :
 wordpress :
 	docker exec -it wordpress /bin/bash
 
+nginx :
+	docker exec -it nginx /bin/bash
+
 net-inspect :
 	docker network inspect inception-network
 
 image-rm :
-	docker image rm mariadb:v42 wordpress:v42
+	docker image rm mariadb:v42 wordpress:v42 nginx:v42
+
 volume-rm :
 	docker volume rm mariadb wordpress
-# container stop -> container rm -> image rm -> volume rm -> network rm
+
 clean :
 	docker stop $(docker ps -qa);
 	docker rm $(docker ps -qa);

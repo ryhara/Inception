@@ -27,28 +27,26 @@ services:
     env_file:
       - ./requirements/wordpress/.env
 
-  # nginx:
-  #   build : ./requirements/nginx
-  #   container_name: nginx
-  #   depends_on:
-  #     - wordpress
-  #   image: nginx:v42
-  #   networks:
-  #     - inception-network
-  #   ports:
-  #     - 443:443
-  #   volumes:
-  #     - wordpress:/var/www/html
-  #   restart: always
-  #   env_file:
-  #     - ./requirements/nginx/.env
-
+  nginx:
+    build : ./requirements/nginx
+    container_name: nginx
+    depends_on:
+      - wordpress
+    image: nginx:v42
+    networks:
+      - inception-network
+    ports:
+      - 443:443
+    volumes:
+      - wordpress:/var/www/html
+    restart: always
+    env_file:
+      - ./requirements/nginx/.env
 
 networks:
   inception-network:
     name: inception-network
 
-# device VM用にあとで書き換える -> 現状はMac内のパスを指定している
 volumes:
   mariadb:
     name: mariadb
