@@ -25,6 +25,7 @@ RUN apt update -y && \
 # /etc/php/8.2/fpm/php-fpm.conf こいついらないかも
 
 COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
+COPY ./tools/test.html /var/www/html/test.html
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
@@ -38,10 +39,10 @@ COPY ./tools/wordpress-6.4.1.tar.gz /tmp/
 # 今回時間節約のためはローカルにwordpressのtar.gzを置いているので、wgetはコメントアウト
 # RUN wget -O /tmp/wordpress-6.4.1.tar.gz https://wordpress.org/wordpress-6.4.1.tar.gz
 
-RUN groupadd -r wordpress && useradd -r -g wordpress wordpress && \
-	groupadd -r nginx && useradd -r -g nginx nginx && \
+RUN groupadd -r www-data www-data && \
+	useradd -r -g www-data www-data && \
 	mkdir -p /var/www/html && \
-	chown -R wordpress:wordpress /var/www/html
+	chown -R www-data:www-data /var/www/html
 
 EXPOSE 9000
 
