@@ -4,7 +4,7 @@ RUN apt update -y && \
 	apt upgrade -y && \
 	apt install -y nginx openssl curl procps
 
-COPY ./conf/default.conf /etc/nginx/conf.d/default.conf
+COPY ./requirements/nginx/conf/default.conf /etc/nginx/conf.d/default.conf
 
 RUN mkdir -p /etc/nginx/ssl/certs && \
 	mkdir -p /etc/nginx/ssl/private

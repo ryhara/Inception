@@ -3,8 +3,8 @@ version: '3'
 services:
   mariadb:
     build :
-      context: ./requirements/mariadb
-      dockerfile: ./recquirements/mariadb/Dockerfile
+      context: .
+      dockerfile: ./requirements/mariadb/Dockerfile
     container_name: mariadb
     image: mariadb:v42
     networks:
@@ -17,7 +17,7 @@ services:
 
   wordpress:
     build :
-      context: ./requirements/wordpress
+      context: .
       dockerfile: ./requirements/wordpress/Dockerfile
     container_name: wordpress
     depends_on:
@@ -33,7 +33,7 @@ services:
 
   nginx:
     build :
-      context: ./requirements/nginx
+      context: .
       dockerfile: ./requirements/nginx/Dockerfile
     container_name: nginx
     depends_on:
@@ -51,8 +51,8 @@ services:
 
   adminer:
     build :
-      context: ./requirements/adminer
-      dockerfile: ./requirements/adminer/Dockerfile
+      context: .
+      dockerfile: ./requirements/bonus/adminer/Dockerfile
     container_name: adminer
     depends_on:
       - mariadb

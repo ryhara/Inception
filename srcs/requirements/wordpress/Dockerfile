@@ -21,17 +21,17 @@ RUN apt update -y && \
 	ca-certificates \
 	mariadb-client
 
-COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
-COPY ./tools/test.html /var/www/html/
+COPY ./requirements/wordpress/conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
+COPY ./requirements/wordpress/tools/test.html /var/www/html/
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp
 
-COPY ./tools/setup.sh /tmp/setup.sh
+COPY ./requirements/wordpress/tools/setup.sh /tmp/setup.sh
 RUN chmod +x /tmp/setup.sh
 
-COPY ./tools/wordpress-6.4.1.tar.gz /tmp/
+COPY ./requirements/wordpress/tools/wordpress-6.4.1.tar.gz /tmp/
 
 # 今回時間節約のためはローカルにwordpressのtar.gzを置いているので、wgetはコメントアウト
 # RUN wget -O /tmp/wordpress-6.4.1.tar.gz https://wordpress.org/wordpress-6.4.1.tar.gz
