@@ -35,6 +35,8 @@ COPY ./requirements/wordpress/tools/wordpress-6.4.1.tar.gz /tmp/
 
 # 今回時間節約のためはローカルにwordpressのtar.gzを置いているので、wgetはコメントアウト
 # RUN wget -O /tmp/wordpress-6.4.1.tar.gz https://wordpress.org/wordpress-6.4.1.tar.gz
+# または、以下のコマンドでwordpressをダウンロードすることもできる
+# wp core download --path=/var/www/html --locale=ja --allow-root
 
 RUN mkdir -p /var/www/html && \
 	chown -R www-data:www-data /var/www/html
