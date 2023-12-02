@@ -43,6 +43,20 @@ services:
     env_file:
       - ./requirements/nginx/.env
 
+  adminer:
+    build : ./requirements/bonus/adminer
+    container_name: adminer
+    depends_on:
+      - mariadb
+    image: adminer:v42
+    networks:
+      - inception-network
+    ports:
+      - 8080:8080
+    volumes:
+      - wordpress:/var/www/html
+    restart: always
+
 networks:
   inception-network:
     name: inception-network

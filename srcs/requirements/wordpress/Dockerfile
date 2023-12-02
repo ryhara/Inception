@@ -21,9 +21,6 @@ RUN apt update -y && \
 	ca-certificates \
 	mariadb-client
 
-# 残りはconf系と、bashの起動は確認　conf追加前は設定できた
-# /etc/php/8.2/fpm/php-fpm.conf こいついらないかも
-
 COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 COPY ./tools/test.html /var/www/html/
 

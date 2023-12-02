@@ -12,6 +12,9 @@ WORDPRESS_PATH = ./srcs/requirements/wordpress
 
 all: up
 
+hosts:
+	@echo "127.0.0.1" >> /etc/hosts
+
 build :
 	docker-compose -f $(DOCKER_COMPOSE_YML) build --no-cache
 
@@ -47,11 +50,14 @@ wordpress :
 nginx :
 	docker exec -it nginx /bin/bash
 
+adminer :
+	docker exec -it adminer /bin/bash
+
 net-inspect :
 	docker network inspect inception-network
 
 image-rm :
-	docker image rm mariadb:v42 wordpress:v42 nginx:v42
+	docker image rm mariadb:v42 wordpress:v42 nginx:v42 adminer:v42
 
 volume-rm :
 	docker volume rm mariadb wordpress
