@@ -49,19 +49,21 @@ services:
     env_file:
       - ./requirements/nginx/.env
 
-  # adminer:
-  #   build :
-  #     context: .
-  #     dockerfile: ./requirements/bonus/adminer/Dockerfile
-  #   container_name: adminer
-  #   depends_on:
-  #     - mariadb
-  #   image: adminer:v42
-  #   networks:
-  #     - inception-network
-  #   ports:
-  #     - 8080:8080
-  #   restart: always
+  adminer:
+    build :
+      context: .
+      dockerfile: ./requirements/bonus/adminer/Dockerfile
+    container_name: adminer
+    depends_on:
+      - mariadb
+    image: adminer:v42
+    networks:
+      - inception-network
+    ports:
+      - 8080:8080
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: always
 
 networks:
   inception-network:

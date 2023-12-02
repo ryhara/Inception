@@ -13,7 +13,7 @@ WORDPRESS_PATH = ./srcs/requirements/wordpress
 all: up
 
 hosts:
-	@echo "127.0.0.1" >> /etc/hosts
+	@echo "127.0.0.1 ryhara.42.fr" >> /etc/hosts
 
 build :
 	docker-compose -f $(DOCKER_COMPOSE_YML) build --no-cache
