@@ -61,8 +61,6 @@ services:
       - inception-network
     ports:
       - 8080:8080
-    volumes:
-      - wordpress:/var/www/html
     restart: always
 
 networks:

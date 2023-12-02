@@ -4,7 +4,8 @@ RUN apt update -y &&\
 	apt upgrade -y &&\
 	apt install -y php8.2 php8.2-mysql wget
 
-# RUN wget "http://www.adminer.org/latest.php" -O /var/www/html/adminer.php
+# RUN mkdir -p /tmp/adminer && \
+	# wget "http://www.adminer.org/latest.php" -O /tmp/adminer/adminer.php
 
 RUN mkdir -p /tmp/adminer
 COPY  ./requirements/bonus/adminer/tools/adminer-4.8.1.php /tmp/adminer/adminer.php
