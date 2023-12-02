@@ -22,7 +22,7 @@ RUN apt update -y && \
 	mariadb-client
 
 COPY ./requirements/wordpress/conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
-COPY ./requirements/wordpress/tools/test.html /var/www/html/
+COPY ./requirements/wordpress/tools/test.html /tmp
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
