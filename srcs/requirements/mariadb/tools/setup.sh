@@ -19,9 +19,9 @@ mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATAB
 mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES;"
 
 # adminer用user
-mysql -u root -p${MYSQL_ROOT_PASSWORD} -e CREATE USER 'adminer'@'adminer.inception-network' IDENTIFIED BY 'password';
-mysql -u root -p${MYSQL_ROOT_PASSWORD} -e GRANT ALL PRIVILEGES ON *.* TO 'adminer'@'adminer.inception-network' WITH GRANT OPTION;
-mysql -u root -p${MYSQL_ROOT_PASSWORD} -e FLUSH PRIVILEGES;
+# mysql -u root -p${MYSQL_ROOT_PASSWORD} -e CREATE USER 'adminer'@'adminer.inception-network' IDENTIFIED BY 'password';
+# mysql -u root -p${MYSQL_ROOT_PASSWORD} -e GRANT ALL PRIVILEGES ON *.* TO 'adminer'@'adminer.inception-network' WITH GRANT OPTION;
+# mysql -u root -p${MYSQL_ROOT_PASSWORD} -e FLUSH PRIVILEGES;
 
 
 mysqladmin -u root -p"${MYSQL_ROOT_PASSWORD}" shutdown && sleep 5
