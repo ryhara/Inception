@@ -1,9 +1,12 @@
 #!/bin/bash
 
-tar -xvzf /tmp/wordpress-6.4.1.tar.gz -C /var/www/html/
-mv /var/www/html/wordpress/* /var/www/html/.
-rm -rf /var/www/html/wordpress
+# tarを使用する場合
+# tar -xvzf /tmp/wordpress-6.4.1.tar.gz -C /var/www/html/
+# mv /var/www/html/wordpress/* /var/www/html/.
+# rm -rf /var/www/html/wordpress
 mv /tmp/test.html /var/www/html/
+
+wp cli update --allow-root
 
 wp config create	--allow-root \
 					--dbname=$WORDPRESS_DB_NAME \

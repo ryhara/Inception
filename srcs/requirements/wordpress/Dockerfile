@@ -31,15 +31,16 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 COPY ./requirements/wordpress/tools/setup.sh /tmp/setup.sh
 RUN chmod +x /tmp/setup.sh
 
-COPY ./requirements/wordpress/tools/wordpress-6.4.1.tar.gz /tmp/
+# tar使用する場合
+# COPY ./requirements/wordpress/tools/wordpress-6.4.1.tar.gz /tmp/
+# RUN mkdir -p /var/www/html && \
+	# chown -R www-data:www-data /var/www/html && \
 
-# 今回時間節約のためはローカルにwordpressのtar.gzを置いているので、wgetはコメントアウト
+# wgetで取得する場合
 # RUN wget -O /tmp/wordpress-6.4.1.tar.gz https://wordpress.org/wordpress-6.4.1.tar.gz
-# または、以下のコマンドでwordpressをダウンロードすることもできる
-# wp core download --path=/var/www/html --locale=ja --allow-root
-
 RUN mkdir -p /var/www/html && \
-	chown -R www-data:www-data /var/www/html
+	chown -R www-data:www-data /var/www/html && \
+	wp core download --path=/var/www/html --locale=ja --allow-root
 
 EXPOSE 9000
 
