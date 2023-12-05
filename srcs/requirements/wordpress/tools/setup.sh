@@ -31,4 +31,12 @@ wp user create		--allow-root \
 					--role=author \
 					--path=/var/www/html/ \
 
+wp option update	--allow-root \
+					--path=/var/www/html/ \
+					home $WORDPRESS_URL
+
+wp option update	--allow-root \
+					--path=/var/www/html/ \
+					siteurl $WORDPRESS_URL
+
 exec "$@"

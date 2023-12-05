@@ -29,6 +29,8 @@ stop :
 down :
 	docker-compose -f $(DOCKER_COMPOSE_YML) down
 	make image-rm
+	rm -rf $(MARIADB_VOLUME_PATH)
+	rm -rf $(WORDPRESS_VOLUME_PATH)
 
 re : down up
 
