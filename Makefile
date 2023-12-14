@@ -10,7 +10,7 @@ MARIADB_PATH = ./srcs/requirements/mariadb
 NGINX_PATH = ./srcs/requirements/nginx
 WORDPRESS_PATH = ./srcs/requirements/wordpress
 
-all: up
+all: build up
 
 hosts:
 	@echo "127.0.0.1 ryhara.42.fr" >> /etc/hosts
@@ -29,8 +29,8 @@ stop :
 down :
 	docker-compose -f $(DOCKER_COMPOSE_YML) down
 	make image-rm
-	rm -rf $(MARIADB_VOLUME_PATH)
-	rm -rf $(WORDPRESS_VOLUME_PATH)
+	make volume-rm
+	make volume-clean
 
 re : down up
 
@@ -63,6 +63,9 @@ image-rm :
 
 volume-rm :
 	docker volume rm mariadb wordpress
+
+volume-clean :
+	rm -rf $(MARIADB_VOLUME_PATH) $(WORDPRESS_VOLUME_PATH)
 
 clean :
 	docker stop $(docker ps -qa);

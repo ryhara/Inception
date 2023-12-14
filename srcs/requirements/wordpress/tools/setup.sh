@@ -8,12 +8,14 @@ mv /tmp/test.html /var/www/html/
 
 wp cli update --allow-root
 
-wp config create	--allow-root \
+sleep 10
+
+wp config create	--path=/var/www/html \
+					--allow-root \
 					--dbname=$WORDPRESS_DB_NAME \
 					--dbuser=$WORDPRESS_DB_USER \
 					--dbpass=$WORDPRESS_DB_PASSWORD \
-					--dbhost=$WORDPRESS_DB_HOST \
-					--path=/var/www/html/ \
+					--dbhost=$WORDPRESS_DB_HOST
 
 wp core install		--allow-root \
 					--url=$WORDPRESS_URL \
@@ -22,21 +24,21 @@ wp core install		--allow-root \
 					--admin_password=$WORDPRESS_ADMIN_PASSWORD \
 					--admin_email=$WORDPRESS_ADMIN_EMAIL \
 					--skip-email \
-					--path=/var/www/html/ \
+					--path=/var/www/html/
 
 wp user create		--allow-root \
 					$WORDPRESS_USER1 \
 					$WORDPRESS_USER1_EMAIL \
 					--user_pass=$WORDPRESS_USER1_PASSWORD \
 					--role=author \
-					--path=/var/www/html/ \
+					--path=/var/www/html/
 
-wp option update	--allow-root \
-					--path=/var/www/html/ \
-					home $WORDPRESS_URL
+# wp option update	--allow-root \
+# 					--path=/var/www/html/ \
+# 					home $WORDPRESS_URL
 
-wp option update	--allow-root \
-					--path=/var/www/html/ \
-					siteurl $WORDPRESS_URL
+# wp option update	--allow-root \
+# 					--path=/var/www/html/ \
+# 					siteurl $WORDPRESS_URL
 
 exec "$@"
