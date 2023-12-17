@@ -13,6 +13,7 @@ WORDPRESS_PATH = ./srcs/requirements/wordpress
 all: build up
 
 hosts:
+	@cp /etc/hosts /etc/hosts.backup
 	@echo "127.0.0.1 ryhara.42.fr" >> /etc/hosts
 
 build :
