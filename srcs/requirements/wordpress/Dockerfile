@@ -2,26 +2,26 @@ FROM debian:bullseye
 
 RUN apt update -y && \
 	apt upgrade -y && \
-	apt install -y php8.2 \
-	php8.2-fpm \
-	php8.2-mysql \
-	php8.2-curl \
-	php8.2-dom \
-	php8.2-exif \
-	php8.2-fileinfo \
-	php8.2-igbinary \
-	php8.2-imagick \
-	php8.2-intl \
-	php8.2-mbstring \
-	php8.2-xml \
-	php8.2-zip \
+	apt install -y php7.4 \
+	php7.4-fpm \
+	php7.4-mysql \
+	php7.4-curl \
+	php7.4-dom \
+	php7.4-exif \
+	php7.4-fileinfo \
+	php7.4-igbinary \
+	php7.4-imagick \
+	php7.4-intl \
+	php7.4-mbstring \
+	php7.4-xml \
+	php7.4-zip \
 	curl \
 	tar \
 	wget \
 	ca-certificates \
 	mariadb-client
 
-COPY ./requirements/wordpress/conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
+COPY ./requirements/wordpress/conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 COPY ./requirements/wordpress/tools/test.html /tmp
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
@@ -49,4 +49,4 @@ EXPOSE 9000
 
 ENTRYPOINT ["/tmp/setup.sh"]
 
-CMD ["php-fpm8.2", "-F"]
+CMD ["php-fpm7.4", "-F"]

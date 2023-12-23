@@ -16,6 +16,8 @@ hosts:
 	@sudo cp /etc/hosts /etc/hosts.backup
 	@sudo echo "127.0.0.1 ryhara.42.fr" >> /etc/hosts
 
+# TODO : downでvolumeをけさないようにする
+
 build :
 	docker-compose -f $(DOCKER_COMPOSE_YML) build --no-cache
 

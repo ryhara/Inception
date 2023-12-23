@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 RUN apt update -y &&\
 	apt upgrade -y &&\
-	apt install -y php8.2 php8.2-mysql wget
+	apt install -y php7.4 php7.4-mysql wget
 
 RUN mkdir -p /var/www/html/ && \
 	wget "http://www.adminer.org/latest.php" -O /var/www/html/adminer.php
