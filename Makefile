@@ -14,7 +14,9 @@ all: build up
 
 hosts:
 	@sudo cp /etc/hosts /etc/hosts.backup
+	@sudo chmod +w /etc/hosts
 	@sudo echo "127.0.0.1 ryhara.42.fr" >> /etc/hosts
+	@sudo chmode -w /etc/hosts
 
 # TODO : downでvolumeをけさないようにする
 
