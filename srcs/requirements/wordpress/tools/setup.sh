@@ -37,11 +37,6 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 						--user_pass=$WORDPRESS_USER1_PASSWORD \
 						--role=author \
 						--path=/var/www/html/
-	# wp plugin install	--allow-root \
-	# 					--activate \
-	# 					--path=/var/www/html/ \
-	# 					akismet \
-	# 					hello
 fi
 
 exec "$@"

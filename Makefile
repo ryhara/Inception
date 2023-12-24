@@ -9,33 +9,31 @@ SRCS_PATH = ./srcs
 MARIADB_PATH = ./srcs/requirements/mariadb
 NGINX_PATH = ./srcs/requirements/nginx
 WORDPRESS_PATH = ./srcs/requirements/wordpress
+ENV_PATH = ~/env
 
 all: build up
 
 hosts:
 	@sudo cp /etc/hosts /etc/hosts.backup
-	@sudo chmod +w /etc/hosts
+	@sudo chmod 777 /etc/hosts
 	@sudo echo "127.0.0.1 ryhara.42.fr" >> /etc/hosts
-	@sudo chmode -w /etc/hosts
+	@sudo chmod 644  /etc/hosts
 
 # TODO : downでvolumeをけさないようにする
 
 build :
-	docker-compose -f $(DOCKER_COMPOSE_YML) build --no-cache
+	docker compose -f $(DOCKER_COMPOSE_YML) build --no-cache
 
 up :
 	@mkdir -p $(MARIADB_VOLUME_PATH)
 	@mkdir -p $(WORDPRESS_VOLUME_PATH)
-	docker-compose -f $(DOCKER_COMPOSE_YML) up -d --build
+	docker compose -f $(DOCKER_COMPOSE_YML) up -d --build
 
 stop :
-	docker-compose -f $(DOCKER_COMPOSE_YML) stop
+	docker compose -f $(DOCKER_COMPOSE_YML) stop
 
 down :
-	docker-compose -f $(DOCKER_COMPOSE_YML) down
-	make image-rm
-	make volume-rm
-	make volume-clean
+	docker compose -f $(DOCKER_COMPOSE_YML) down
 
 re : down build up
 
@@ -78,6 +76,12 @@ clean :
 	docker rmi -f $(docker images -qa);
 	docker volume rm $(docker volume ls -q);
 	docker network rm $(docker network ls -q) 2>/dev/null
+
+env-copy:
+	cp $(ENV_PATH)/.env $(SRCS_PATH)/.env
+	cp $(ENV_PATH)/.env.mariadb $(MARIADB_PATH)/.env
+	cp $(ENV_PATH)/.env.nginx $(NGINX_PATH)/.env
+	cp $(ENV_PATH)/.env.wordpress $(WORDPRESS_PATH)/.env
 
 env:
 	cp $(SRCS_PATH)/.env.example $(SRCS_PATH)/.env

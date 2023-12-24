@@ -18,7 +18,6 @@ mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE USER IF NOT EXISTS '${MYSQL_US
 mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';"
 mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES;"
 
-
-mysqladmin -u root -p"${MYSQL_ROOT_PASSWORD}" shutdown && sleep 5
+mysqladmin -u root -p"${MYSQL_ROOT_PASSWORD}" shutdown
 
 exec "$@"
