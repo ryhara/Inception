@@ -35,7 +35,7 @@ down :
 	make volume-rm
 	make volume-clean
 
-re : down up
+re : down build up
 
 ps :
 	docker container ls -a

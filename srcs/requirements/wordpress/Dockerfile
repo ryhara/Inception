@@ -4,7 +4,7 @@ RUN apt update -y && \
 	apt upgrade -y && \
 	apt install -y php7.4 \
 	php7.4-fpm \
-	php7.4-mysql \
+	php7.4-mysqli \
 	php7.4-curl \
 	php7.4-dom \
 	php7.4-exif \
@@ -40,8 +40,7 @@ RUN chmod +x /tmp/setup.sh
 	# chown -R www-data:www-data /var/www/html && \
 
 RUN mkdir -p /var/www/html && \
-	chown -R www-data:www-data /var/www/html && \
-	wp core download --path=/var/www/html --locale=ja --allow-root
+	chown -R www-data:www-data /var/www/html
 
 WORKDIR /var/www/html
 
