@@ -66,7 +66,7 @@ volume-rm :
 	docker volume rm mariadb wordpress
 
 volume-clean :
-	rm -rf $(MARIADB_VOLUME_PATH) $(WORDPRESS_VOLUME_PATH)
+	sudo rm -rf $(MARIADB_VOLUME_PATH) $(WORDPRESS_VOLUME_PATH)
 
 clean :
 	-docker stop $(shell docker ps -qa);
