@@ -5,10 +5,8 @@
 # mv /var/www/html/wordpress/* /var/www/html/.
 # rm -rf /var/www/html/wordpress
 
-# TODO : 初期画面設定
 
 mkdir -p /run/php
-mv /tmp/test.html /var/www/html/
 
 sleep 10
 
