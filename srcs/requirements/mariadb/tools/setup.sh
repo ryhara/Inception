@@ -6,6 +6,7 @@ if [ ! -d "/run/mysqld" ]; then
 fi
 chown -R mysql:mysql /run/mysqld
 
+# TODO : sytemctl, serviceの方が良いかもしれない
 mysqld & sleep 5
 
 # rootに全てのDBの権限を付与
